@@ -6,6 +6,7 @@ Strokes are drawn by stamping filled circles along each path, which yields
 round line caps and smooth thick curves without needing an SVG renderer.
 """
 import os
+import math
 from PIL import Image, ImageDraw
 
 OUT = os.path.dirname(os.path.abspath(__file__))
@@ -48,13 +49,17 @@ img = Image.new("RGB", (S, S), BG)
 d = ImageDraw.Draw(img)
 
 # sun (circle)
-cx, cy, r = P(256, 212)[0], P(256, 212)[1], 72 * sc
+SUN_C, SUN_R = (256, 212), 72
+cx, cy, r = P(*SUN_C)[0], P(*SUN_C)[1], SUN_R * sc
 d.ellipse([cx - r, cy - r, cx + r, cy + r], fill=AMBER)
 
-# rays
-rays = [((256, 96), (256, 128)), ((148, 118), (126, 96)), ((364, 118), (386, 96)),
-        ((150, 212), (118, 212)), ((362, 212), (394, 212))]
-for a, b in rays:
+# rays — evenly spaced across the upper half, each the same distance from the sun's edge
+ray_inner, ray_outer = SUN_R + 28, SUN_R + 56
+for deg in (0, 45, 90, 135, 180):
+    rad = math.radians(deg)
+    dx, dy = math.cos(rad), -math.sin(rad)
+    a = (SUN_C[0] + ray_inner * dx, SUN_C[1] + ray_inner * dy)
+    b = (SUN_C[0] + ray_outer * dx, SUN_C[1] + ray_outer * dy)
     stamp(d, seg_points(P(*a), P(*b)), 15, AMBER)
 
 # furrows
