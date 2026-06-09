@@ -2,10 +2,18 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>Steven's Ag Tools</title>
 <meta name="description" content="A hub of field-ready agricultural tools: tank-mix order, batch math, chemical lookup, weather, soil nitrogen, and more.">
+<meta name="theme-color" content="#1f4e2b">
 <link rel="icon" type="image/svg+xml" href="icon.svg">
+<link rel="manifest" href="manifest.json">
+<!-- iOS "Add to Home Screen" -->
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Ag Tools">
 <style>
   :root {
     --green: #2e6f3e;
@@ -28,7 +36,8 @@
   header {
     background: var(--green-dk);
     color: #fff;
-    padding: 26px 20px;
+    /* extra top/side padding accounts for notches & status bar in standalone app mode */
+    padding: calc(26px + env(safe-area-inset-top)) calc(20px + env(safe-area-inset-right)) 26px calc(20px + env(safe-area-inset-left));
   }
   .title-row {
     display: flex;
@@ -54,7 +63,7 @@
   main {
     max-width: 960px;
     margin: 0 auto;
-    padding: 26px 16px 48px;
+    padding: 26px calc(16px + env(safe-area-inset-right)) calc(48px + env(safe-area-inset-bottom)) calc(16px + env(safe-area-inset-left));
   }
   .section-label {
     font-size: .8rem;
@@ -125,6 +134,22 @@
     color: var(--muted);
   }
   footer a { color: var(--green); }
+
+  /* Phones: tighten spacing, drop the icon-lift hover (no hover on touch), full-width tiles */
+  @media (max-width: 560px) {
+    header { padding-top: calc(20px + env(safe-area-inset-top)); padding-bottom: 20px; }
+    header h1 { font-size: 1.4rem; }
+    .title-icon { width: 46px; height: 46px; }
+    .title-icon svg { width: 34px; height: 34px; }
+    main { padding-top: 20px; }
+    .grid { grid-template-columns: 1fr; gap: 12px; }
+    .section-label { margin: 20px 0 10px; }
+    .tile { padding: 16px; }
+  }
+  @media (hover: none) {
+    .tile:hover { transform: none; box-shadow: none; border-color: var(--line); }
+  }
+  .tile:active { transform: scale(.985); }
 </style>
 </head>
 <body>
