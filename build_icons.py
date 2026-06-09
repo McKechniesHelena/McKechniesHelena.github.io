@@ -47,9 +47,9 @@ def quad_points(p0, c, p2, n=400):
 img = Image.new("RGB", (S, S), BG)
 d = ImageDraw.Draw(img)
 
-# sun (oval)
-cx, cy, rx, ry = P(256, 212)[0], P(256, 212)[1], 80 * sc, 56 * sc
-d.ellipse([cx - rx, cy - ry, cx + rx, cy + ry], fill=AMBER)
+# sun (circle)
+cx, cy, r = P(256, 212)[0], P(256, 212)[1], 72 * sc
+d.ellipse([cx - r, cy - r, cx + r, cy + r], fill=AMBER)
 
 # rays
 rays = [((256, 96), (256, 128)), ((148, 118), (126, 96)), ((364, 118), (386, 96)),
