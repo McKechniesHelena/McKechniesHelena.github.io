@@ -48,19 +48,26 @@ def quad_points(p0, c, p2, n=400):
 img = Image.new("RGB", (S, S), BG)
 d = ImageDraw.Draw(img)
 
-# sun (circle)
-SUN_C, SUN_R = (256, 212), 72
-cx, cy, r = P(*SUN_C)[0], P(*SUN_C)[1], SUN_R * sc
-d.ellipse([cx - r, cy - r, cx + r, cy + r], fill=AMBER)
+# sun as a cog (gear) — 12 teeth with a hollow center
+SUN_C = (256, 212)
 
-# rays — evenly spaced across the upper half, each the same distance from the sun's edge
-ray_inner, ray_outer = SUN_R + 28, SUN_R + 56
-for deg in (0, 45, 90, 135, 180):
-    rad = math.radians(deg)
-    dx, dy = math.cos(rad), -math.sin(rad)
-    a = (SUN_C[0] + ray_inner * dx, SUN_C[1] + ray_inner * dy)
-    b = (SUN_C[0] + ray_outer * dx, SUN_C[1] + ray_outer * dy)
-    stamp(d, seg_points(P(*a), P(*b)), 15, AMBER)
+
+def gear_pts(c, r_root, r_tip, n=12, tip_frac=0.52):
+    pitch = 2 * math.pi / n
+    th_half = pitch * tip_frac / 2
+    pts = []
+    for k in range(n):
+        th = k * pitch
+        for r, a in [(r_tip, th - th_half), (r_tip, th + th_half),
+                     (r_root, th + th_half), (r_root, th + pitch - th_half)]:
+            pts.append(P(c[0] + r * math.cos(a), c[1] + r * math.sin(a)))
+    return pts
+
+
+d.polygon(gear_pts(SUN_C, 64, 88), fill=AMBER)
+bx, by = P(*SUN_C)
+br = 24 * sc
+d.ellipse([bx - br, by - br, bx + br, by + br], fill=BG)
 
 # furrows
 furrows = [((96, 332), (256, 280), (416, 332)),
