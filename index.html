@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ag Tools — Helena McKechnie</title>
+<meta name="description" content="A hub of field-ready agricultural tools: tank-mix order, batch math, chemical lookup, weather, soil nitrogen, and more.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%231f4e2b'/%3E%3Ctext x='16' y='23' font-size='20' text-anchor='middle' fill='white'%3E%F0%9F%8C%BE%3C/text%3E%3C/svg%3E">
+<style>
+  :root {
+    --green: #2e6f3e;
+    --green-dk: #1f4e2b;
+    --green-lt: #e7f1e9;
+    --ink: #1c2620;
+    --muted: #5b6b60;
+    --line: #d7e0d9;
+    --bg: #f6f8f6;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    color: var(--ink);
+    background: var(--bg);
+    line-height: 1.45;
+    -webkit-text-size-adjust: 100%;
+  }
+  header {
+    background: var(--green-dk);
+    color: #fff;
+    padding: 26px 20px;
+  }
+  .title-row {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    max-width: 960px;
+    margin: 0 auto;
+  }
+  .title-icon {
+    flex-shrink: 0;
+    font-size: 2rem;
+    background: #fff;
+    border-radius: 12px;
+    width: 52px;
+    height: 52px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  header h1 { margin: 0 0 4px; font-size: 1.6rem; }
+  header .sub { margin: 0; font-size: .92rem; color: #cfe3d3; max-width: 70ch; }
+
+  main {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 26px 16px 48px;
+  }
+  .section-label {
+    font-size: .8rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: .06em;
+    color: var(--green);
+    margin: 26px 0 12px;
+  }
+  .section-label:first-child { margin-top: 0; }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 14px;
+  }
+  .tile {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    background: #fff;
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    padding: 18px;
+    text-decoration: none;
+    color: inherit;
+    transition: transform .12s ease, box-shadow .12s ease, border-color .12s ease;
+  }
+  .tile:hover, .tile:focus-visible {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(31, 78, 43, .14);
+    border-color: var(--green);
+    outline: none;
+  }
+  .tile .emoji {
+    font-size: 1.8rem;
+    line-height: 1;
+    background: var(--green-lt);
+    width: 46px;
+    height: 46px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .tile h2 {
+    margin: 0;
+    font-size: 1.06rem;
+    color: var(--green-dk);
+  }
+  .tile p {
+    margin: 0;
+    font-size: .88rem;
+    color: var(--muted);
+    flex-grow: 1;
+  }
+  .tile .go {
+    font-size: .82rem;
+    font-weight: 700;
+    color: var(--green);
+  }
+
+  footer {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 0 16px 40px;
+    font-size: .82rem;
+    color: var(--muted);
+  }
+  footer a { color: var(--green); }
+</style>
+</head>
+<body>
+<header>
+  <div class="title-row">
+    <div class="title-icon">🌾</div>
+    <div>
+      <h1>Ag Tools</h1>
+      <p class="sub">Field-ready calculators and weather helpers for spraying, soil nitrogen, and crop staging.</p>
+    </div>
+  </div>
+</header>
+
+<main>
+  <div class="section-label">Spraying &amp; tank-mix</div>
+  <div class="grid">
+    <a class="tile" href="https://mckechnieshelena.github.io/Mixing_Order_Tool/">
+      <div class="emoji">🪣</div>
+      <h2>Tank-Mix Order</h2>
+      <p>Determine the correct order to add products to the tank.</p>
+      <span class="go">Open →</span>
+    </a>
+    <a class="tile" href="https://mckechnieshelena.github.io/Batch_Calculator/">
+      <div class="emoji">🧮</div>
+      <h2>Batch Calculator</h2>
+      <p>Products needed per batch based on GPA and tank size.</p>
+      <span class="go">Open →</span>
+    </a>
+    <a class="tile" href="https://mckechnieshelena.github.io/Chem_Lookup/">
+      <div class="emoji">🔍</div>
+      <h2>Chemical Lookup</h2>
+      <p>Look up chemicals and their rates.</p>
+      <span class="go">Open →</span>
+    </a>
+    <a class="tile" href="https://mckechnieshelena.github.io/Liberty_Spray_helper/">
+      <div class="emoji">💨</div>
+      <h2>Liberty Spray Helper</h2>
+      <p>Find the best day to apply Liberty herbicide this week.</p>
+      <span class="go">Open →</span>
+    </a>
+    <a class="tile" href="https://mckechnieshelena.github.io/Dicamba_Forecast_Tool/">
+      <div class="emoji">🌦️</div>
+      <h2>Dicamba Forecast</h2>
+      <p>Forecast conditions for dicamba application over soybeans.</p>
+      <span class="go">Open →</span>
+    </a>
+  </div>
+
+  <div class="section-label">Soil &amp; nutrients</div>
+  <div class="grid">
+    <a class="tile" href="https://mckechnieshelena.github.io/PSNT-Calculator/">
+      <div class="emoji">🌱</div>
+      <h2>PSNT Calculator</h2>
+      <p>Interpret Pre-Sidedress Nitrate tests and decide next steps.</p>
+      <span class="go">Open →</span>
+    </a>
+    <a class="tile" href="https://mckechnieshelena.github.io/slow-release-n/">
+      <div class="emoji">⏳</div>
+      <h2>Slow Release N</h2>
+      <p>Slow-release nitrogen calculator.</p>
+      <span class="go">Open →</span>
+    </a>
+  </div>
+
+  <div class="section-label">Weather &amp; crop staging</div>
+  <div class="grid">
+    <a class="tile" href="https://mckechnieshelena.github.io/Corn-GDU-Tool-NAST/">
+      <div class="emoji">🌽</div>
+      <h2>Corn GDU Tool</h2>
+      <p>Growing-degree-unit emergence tool for corn.</p>
+      <span class="go">Open →</span>
+    </a>
+    <a class="tile" href="https://mckechnieshelena.github.io/Historic_Weather/">
+      <div class="emoji">📊</div>
+      <h2>Historic Weather</h2>
+      <p>Look up historic weather data.</p>
+      <span class="go">Open →</span>
+    </a>
+  </div>
+</main>
+
+<footer>
+  Built by Helena McKechnie · <a href="https://github.com/McKechniesHelena">github.com/McKechniesHelena</a>
+</footer>
+</body>
+</html>
