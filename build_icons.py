@@ -58,14 +58,14 @@ def gear_pts(c, r_root, r_tip, extra, n=12, tip_frac=0.52):
     pts = []
     for k in range(n):
         th = k * pitch
-        rt = r_tip + extra * max(0.0, -math.sin(th))   # upper teeth stretch into rays
+        rt = r_tip + extra * (1 - math.sin(th)) / 2   # rays fade from top down past the sides
         for r, a in [(rt, th - th_half), (rt, th + th_half),
                      (r_root, th + th_half), (r_root, th + pitch - th_half)]:
             pts.append(P(c[0] + r * math.cos(a), c[1] + r * math.sin(a)))
     return pts
 
 
-d.polygon(gear_pts(SUN_C, 64, 88, 42), fill=AMBER)
+d.polygon(gear_pts(SUN_C, 64, 88, 56), fill=AMBER)
 bx, by = P(*SUN_C)
 br = 24 * sc
 d.ellipse([bx - br, by - br, bx + br, by + br], fill=BG)
