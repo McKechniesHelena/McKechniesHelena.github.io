@@ -1,7 +1,7 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
   <!-- Steven's Ag Tools — rising sun over furrowed field -->
   <rect width="64" height="64" rx="14" fill="#1f4e2b"/>
-  <circle cx="32" cy="24" r="9" fill="#f6c244"/>
+  <ellipse cx="32" cy="24" rx="11" ry="7.5" fill="#f6c244"/>
   <g stroke="#f6c244" stroke-width="2.2" stroke-linecap="round">
     <path d="M32 8 V11"/>
     <path d="M16 24 H13"/>
