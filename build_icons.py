@@ -52,19 +52,20 @@ d = ImageDraw.Draw(img)
 SUN_C = (256, 212)
 
 
-def gear_pts(c, r_root, r_tip, n=12, tip_frac=0.52):
+def gear_pts(c, r_root, r_tip, extra, n=12, tip_frac=0.52):
     pitch = 2 * math.pi / n
     th_half = pitch * tip_frac / 2
     pts = []
     for k in range(n):
         th = k * pitch
-        for r, a in [(r_tip, th - th_half), (r_tip, th + th_half),
+        rt = r_tip + extra * max(0.0, -math.sin(th))   # upper teeth stretch into rays
+        for r, a in [(rt, th - th_half), (rt, th + th_half),
                      (r_root, th + th_half), (r_root, th + pitch - th_half)]:
             pts.append(P(c[0] + r * math.cos(a), c[1] + r * math.sin(a)))
     return pts
 
 
-d.polygon(gear_pts(SUN_C, 64, 88), fill=AMBER)
+d.polygon(gear_pts(SUN_C, 64, 88, 42), fill=AMBER)
 bx, by = P(*SUN_C)
 br = 24 * sc
 d.ellipse([bx - br, by - br, bx + br, by + br], fill=BG)
